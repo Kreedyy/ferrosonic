@@ -52,7 +52,7 @@ Build dependencies (needed to compile from source):
 Supports Arch, Fedora, and Debian/Ubuntu. Installs dependencies, Rust (if needed), builds from source, and installs to `/usr/local/bin/`:
 
 ```bash
-curl -sSf https://gitea.jaidaken.dev/jaidaken/ferrosonic/raw/branch/master/install.sh | sh
+curl -sSf https://github.com/jaidaken/ferrosonic/raw/branch/master/install.sh | sh
 ```
 
 ### Manual Build
@@ -60,7 +60,7 @@ curl -sSf https://gitea.jaidaken.dev/jaidaken/ferrosonic/raw/branch/master/insta
 If you prefer to build manually, install the dependencies listed above, then:
 
 ```bash
-git clone https://gitea.jaidaken.dev/jaidaken/ferrosonic.git
+git clone https://github.com/jaidaken/ferrosonic.git
 cd ferrosonic
 cargo build --release
 sudo cp target/release/ferrosonic /usr/local/bin/

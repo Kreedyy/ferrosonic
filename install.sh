@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-REPO="https://gitea.jaidaken.dev/jaidaken/ferrosonic.git"
+REPO="https://github.com/jaidaken/ferrosonic.git"
 INSTALL_DIR="/usr/local/bin"
 
 echo "Ferrosonic installer"
