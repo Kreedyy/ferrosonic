@@ -47,76 +47,22 @@ Build dependencies (needed to compile from source):
 | **pkg-config** | `pkgconf` | `pkgconf-pkg-config` | `pkg-config` |
 | **D-Bus dev headers** | `dbus` | `dbus-devel` | `libdbus-1-dev` |
 
-### Arch Linux
+### Quick Install
+
+Supports Arch, Fedora, and Debian/Ubuntu. Installs dependencies, Rust (if needed), builds from source, and installs to `/usr/local/bin/`:
 
 ```bash
-# Install runtime dependencies
-sudo pacman -S mpv pipewire wireplumber
-
-# Install build dependencies
-sudo pacman -S base-devel pkgconf dbus
-
-# Build from source
-git clone https://github.com/jaidaken/ferrosonic.git
-cd ferrosonic
-cargo build --release
-
-# Binary is at target/release/ferrosonic
-sudo cp target/release/ferrosonic /usr/local/bin/
+curl -sSf https://gitea.jaidaken.dev/jaidaken/ferrosonic/raw/branch/master/install.sh | sh
 ```
 
-### Fedora
+### Manual Build
+
+If you prefer to build manually, install the dependencies listed above, then:
 
 ```bash
-# Install runtime dependencies
-sudo dnf install mpv pipewire wireplumber
-
-# Install build dependencies
-sudo dnf install gcc pkgconf-pkg-config dbus-devel
-
-# Install Rust toolchain if not already installed
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# Build from source
-git clone https://github.com/jaidaken/ferrosonic.git
+git clone https://gitea.jaidaken.dev/jaidaken/ferrosonic.git
 cd ferrosonic
 cargo build --release
-sudo cp target/release/ferrosonic /usr/local/bin/
-```
-
-### Ubuntu / Debian
-
-```bash
-# Install runtime dependencies
-sudo apt install mpv pipewire wireplumber
-
-# Install build dependencies
-sudo apt install build-essential pkg-config libdbus-1-dev
-
-# Install Rust toolchain if not already installed
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# Build from source
-git clone https://github.com/jaidaken/ferrosonic.git
-cd ferrosonic
-cargo build --release
-sudo cp target/release/ferrosonic /usr/local/bin/
-```
-
-### Generic (any Linux distribution)
-
-Ensure `mpv` is installed and available in your `PATH`. PipeWire is optional but required for automatic sample rate switching.
-
-```bash
-# Install Rust toolchain
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# Build
-git clone https://github.com/jaidaken/ferrosonic.git
-cd ferrosonic
-cargo build --release
-
-# Install
 sudo cp target/release/ferrosonic /usr/local/bin/
 ```
 
