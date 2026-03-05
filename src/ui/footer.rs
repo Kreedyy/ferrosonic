@@ -99,7 +99,15 @@ impl Widget for Footer<'_> {
             return;
         }
 
-        let chunks = Layout::horizontal([Constraint::Min(40), Constraint::Length(30)]).split(area);
+        // Only reserve space on the right side when there's a sample rate to show
+        let rate_str = self.sample_rate.map(|r| format!("{}kHz", r / 1000));
+        let right_width = rate_str.as_ref().map(|s| s.len() as u16 + 1).unwrap_or(0);
+
+        let chunks = Layout::horizontal([
+            Constraint::Min(0),
+            Constraint::Length(right_width),
+        ])
+        .split(area);
 
         // Left side: keybinds or notification
         if let Some(notif) = self.notification {
@@ -130,16 +138,10 @@ impl Widget for Footer<'_> {
             buf.set_line(chunks[0].x, chunks[0].y, &line, chunks[0].width);
         }
 
-        // Right side: sample rate / status
-        if let Some(rate) = self.sample_rate {
-            let rate_str = format!("{}kHz", rate / 1000);
+        // Right side: sample rate
+        if let Some(rate_str) = rate_str {
             let x = chunks[1].x + chunks[1].width.saturating_sub(rate_str.len() as u16);
-            buf.set_string(
-                x,
-                chunks[1].y,
-                &rate_str,
-                Style::default().fg(self.colors.success),
-            );
+            buf.set_string(x, chunks[1].y, &rate_str, Style::default().fg(self.colors.success));
         }
     }
 }
