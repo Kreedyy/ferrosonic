@@ -280,6 +280,13 @@ impl MpvController {
         Ok(data.and_then(|v| v.as_f64()).unwrap_or(0.0))
     }
 
+    /// Decrease/Increase volume by delta
+    pub fn add_volume(&mut self, delta: i32) -> Result<(), AudioError> {
+        debug!("Adjusting volume by {}", delta);
+        self.send_command(vec![json!("add"), json!("volume"), json!(delta)])?;
+        Ok(())
+    }
+
     /// Set volume (0-100)
     pub fn set_volume(&mut self, volume: i32) -> Result<(), AudioError> {
         debug!("Setting volume to {}", volume);

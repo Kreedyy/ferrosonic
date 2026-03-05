@@ -120,6 +120,17 @@ impl App {
                 }
                 return Ok(());
             }
+            (KeyCode::Char('-'), KeyModifiers::NONE) => {
+                drop(state);
+                let _ = self.mpv.add_volume(-5);
+                return Ok(());
+            }
+            (KeyCode::Char('+'), KeyModifiers::NONE) => {
+                drop(state);
+                let _ = self.mpv.add_volume(5);
+                return Ok(());
+            }
+
             // Ctrl+R to refresh data from server
             (KeyCode::Char('r'), KeyModifiers::CONTROL) => {
                 state.notify("Refreshing...");
