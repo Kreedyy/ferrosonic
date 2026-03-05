@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-REPO="https://github.com/jaidaken/ferrosonic"
+REPO="https://github.com/Kreedyy/ferrosonic"
 INSTALL_DIR="/usr/local/bin"
 
 echo "Ferrosonic installer"
@@ -10,7 +10,7 @@ echo "===================="
 # Detect architecture
 ARCH=$(uname -m)
 case "$ARCH" in
-    x86_64) ASSET="ferrosonic-linux-x86_64" ;;
+    x86_64) ARCH_SUFFIX="linux-x86_64" ;;
     *)
         echo "No precompiled binary for $ARCH. Please build from source."
         echo "See: $REPO#manual-build"
@@ -60,7 +60,8 @@ fi
 
 # Download latest release binary
 echo "Downloading ferrosonic..."
-LATEST=$(curl -sI "$REPO/releases/latest" | grep -i '^location:' | sed 's/.*tag\///' | tr -d '\r')
+LATEST=$(curl -sSf "https://api.github.com/repos/$(echo "$REPO" | sed 's|https://github.com/||')/releases/latest" | grep -m1 '"tag_name"' | sed 's/.*"tag_name" *: *"\([^"]*\)".*/\1/')
+ASSET="ferrosonic-${LATEST}-${ARCH_SUFFIX}"
 DOWNLOAD_URL="$REPO/releases/download/$LATEST/$ASSET"
 TMPFILE=$(mktemp)
 curl -sL "$DOWNLOAD_URL" -o "$TMPFILE"
