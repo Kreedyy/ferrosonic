@@ -110,6 +110,14 @@ impl App {
             drop(state);
         } else {
             info!("MPV started successfully, ready for playback");
+
+            // Apply configured startup volume
+            {
+                let state = self.state.read().await;
+                if let Some(vol) = state.config.volume {
+                    let _ = self.mpv.set_volume(vol.clamp(0, 100) as i32);
+                }
+            }
         }
 
         // Start MPRIS server for media key support

@@ -34,6 +34,10 @@ pub struct Config {
     /// Cava visualizer height percentage (10-80, step 5)
     #[serde(rename = "CavaSize", default = "Config::default_cava_size")]
     pub cava_size: u8,
+
+    /// Initial volume on startup (0-100). If not set, MPV uses its default
+    #[serde(rename = "Volume", default)]
+    pub volume: Option<u8>,
 }
 
 impl Config {

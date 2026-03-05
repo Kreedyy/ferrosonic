@@ -79,6 +79,7 @@ Configuration is stored at `~/.config/ferrosonic/config.toml`. You can edit it m
 BaseURL = "https://your-subsonic-server.com"
 Username = "your-username"
 Password = "your-password"
+Volume = 80
 Theme = "Default"
 ```
 
@@ -87,6 +88,7 @@ Theme = "Default"
 | `BaseURL` | URL of your Subsonic-compatible server (Navidrome, Airsonic, Gonic, etc.) |
 | `Username` | Your server username |
 | `Password` | Your server password |
+| `Volume` | Startup volume level (0-100) |
 | `Theme` | Color theme name (e.g. `Default`, `Catppuccin`, `Tokyo Night`) |
 
 Logs are written to `~/.config/ferrosonic/ferrosonic.log`.
