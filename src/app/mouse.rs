@@ -32,6 +32,7 @@ impl App {
         let layout = state.layout.clone();
         let page = state.page;
         let duration = state.now_playing.duration;
+        let position = state.now_playing.position;
         drop(state);
 
         // Check header area
@@ -68,12 +69,15 @@ impl App {
             if y == inner_bottom && duration > 0.0 {
                 let inner_x_start = layout.now_playing.x + 1;
                 let inner_width = layout.now_playing.width.saturating_sub(2);
-                if inner_width > 15 && x >= inner_x_start {
+                
+                let pos_str = crate::app::state::format_duration(position);
+                let dur_str = crate::app::state::format_duration(duration);
+                let time_width = (pos_str.len() + 3 + dur_str.len()) as u16; // "pos / dur"
+                let bar_width = inner_width.saturating_sub(time_width + 3);
+                let bar_start = time_width + 2;
+                if bar_width > 0 && x >= inner_x_start {
                     let rel_x = x - inner_x_start;
-                    let time_width = 15u16;
-                    let bar_width = inner_width.saturating_sub(time_width + 2);
-                    let bar_start = (inner_width.saturating_sub(time_width + 2 + bar_width)) / 2 + time_width + 2;
-                    if bar_width > 0 && rel_x >= bar_start && rel_x < bar_start + bar_width {
+                    if rel_x >= bar_start && rel_x < bar_start + bar_width {
                         let fraction = (rel_x - bar_start) as f64 / bar_width as f64;
                         let seek_pos = fraction * duration;
                         let _ = self.mpv.seek(seek_pos);
