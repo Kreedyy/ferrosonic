@@ -44,7 +44,7 @@ Ferrosonic requires the following at runtime:
 Supports Arch, Fedora, and Debian/Ubuntu. Installs runtime dependencies, downloads the latest precompiled binary, and installs to `/usr/local/bin/`:
 
 ```bash
-curl -sSf https://raw.githubusercontent.com/jaidaken/ferrosonic/master/install.sh | sh
+curl -sSf https://raw.githubusercontent.com/kreedyy/ferrosonic/master/install.sh | sh
 ```
 
 ### Build from Source
@@ -52,7 +52,7 @@ curl -sSf https://raw.githubusercontent.com/jaidaken/ferrosonic/master/install.s
 If you prefer to build from source, you'll also need: Rust toolchain, pkg-config, OpenSSL dev headers, and D-Bus dev headers. Then:
 
 ```bash
-git clone https://github.com/jaidaken/ferrosonic.git
+git clone https://github.com/kreedyy/ferrosonic.git
 cd ferrosonic
 cargo build --release
 sudo cp target/release/ferrosonic /usr/local/bin/
@@ -103,6 +103,8 @@ Logs are written to `~/.config/ferrosonic/ferrosonic.log`.
 | `h` | Previous track |
 | `Ctrl+R` | Refresh data from server |
 | `t` | Cycle to next theme |
+| `-` | Decrease volume |
+| `+` | Increase volume |
 | `F1` | Artists page |
 | `F2` | Queue page |
 | `F3` | Playlists page |
